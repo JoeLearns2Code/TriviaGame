@@ -68,8 +68,8 @@ function openGame () {
  //upon clicking start the game begins:
  $(".startbutton").on("click", function startGame() {
      console.log("click click"); //this will initiate function that starts the game.
+     cycleQuiz();
     });
-    
 
 };
 window.onload = openGame;
@@ -84,14 +84,16 @@ window.onload = openGame;
 
 //TODO: start game sequence
 
-function startGame (){
+function cycleQuiz (){
     
     //TODO: display timer with countdown in #timeleft.
-    
+    $("#timeleft").html("Time Remaining: " + timeLeft);
     //TODO: display first question from object in #questionblock
-    $("#questionblock").html(triviaQuestions.question);
+    $("#questionblock").replaceWith(triviaQuestions[questionIndex].question);
+    console.log("this works");
     
     //TODO: display column of potential answers from object as clickable buttons in #answerblock
+    $("#answerblock").replaceWith("<br>" + triviaQuestions[questionIndex].answers);
     
     
     
