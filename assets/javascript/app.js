@@ -67,7 +67,7 @@ function openGame () {
  $("#answerblock").html("<button class= startbutton>Press Here to Begin the Voyage</button>");
  //upon clicking start the game begins:
  $(".startbutton").on("click", function startGame() {
-     console.log("click click"); //this will initiate function that starts the game.
+    //  console.log("click click"); //this will initiate function that starts the game.
      cycleQuiz();
     });
 
@@ -75,8 +75,6 @@ function openGame () {
 window.onload = openGame;
     
     
-    
-//TODO: reset mechanic, which brings the game back to the first question, having the similar effect as "start" did(but replacing start).
 
 
 // functions for timer to go down 30 seconds, before triggering function to go to next question.
@@ -123,7 +121,7 @@ function cycleQuiz (){
     // display first question from object in #questionblock
     $("#questionblock").empty();
     $("#questionblock").html(triviaQuestions[questionIndex].question);
-    console.log("this works");
+    // console.log("this works");
     
     // display column of potential answers from object as clickable buttons in #answerblock
    
@@ -140,10 +138,46 @@ function cycleQuiz (){
     
     //TODO: Answer buttons clicked, leading to a correct or wrong answer.
     
+    $(".answerbutton").click(function answerQuestion() {
+      if(triviaQuestions[questionIndex].answers === triviaQuestions[questionIndex].correct) {
+        clearInterval(intervalId);
+        timeCount = false;
+        if (questionIndex >= 5) {
+        correctAnswers++;
+        resetPage();
+
+        } else {
+        correctAnswers++;
+        questionIndex++;
+        timeLeft = 30;
+        cycleQuiz();
+
+      } 
+      
+      if (triviaQuestions[questionIndex].answers !== triviaQuestions[questionIndex].correct) {
+        clearInterval(intervalId);
+        timeCount = false;
+        if (questionIndex >= 5) {
+        incorrectAnswers++;
+        resetPage();
         
+        } else {    
+        incorrectAnswers++;
+        questionIndex++;
+        timeLeft = 30;
+        cycleQuiz();
+        }
+
+
+      }
+
+
+
+    };
     
+    });
     
-}
+};
 
 
 
