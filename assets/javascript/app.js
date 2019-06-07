@@ -118,7 +118,7 @@ function countdown (){
 // start game sequence
 
 function cycleQuiz (){
-    
+
     $("#timeleft").html("Time Remaining: " + timeLeft);
     // display first question from object in #questionblock
     $("#questionblock").empty();
@@ -138,16 +138,16 @@ function cycleQuiz (){
 
     startInterval();
     
+    //TODO: Answer buttons clicked, leading to a correct or wrong answer.
     
         
-    
     
     
 }
 
 
 
-//TODO: function to create final page, showing correctAnswers, incorrectAnswers, unanswered, and add a button to reset the question cycle.
+// function to create final page, showing correctAnswers, incorrectAnswers, unanswered, and add a button to reset the question cycle.
 
 function resetPage () {
 
@@ -155,33 +155,39 @@ function resetPage () {
     $("#questionblock").empty();
     $("#questionblock").html("And thar she blows!  See how ye did: ");
     $("#answerblock").empty();
-    $("#answerblock").html("<br>" + "<p id='totalcorrect'>" + "<br>" + "<p id='totalincorrect'" + "</p>" + "<br>" + "<p id='totalunanswered'" + "</p>");
+    $("#answerblock").html("<br>" + "<p id='totalcorrect'" + "</p>" + "<p id='totalincorrect'" + "</p>" + "<br>" + "<p id='totalunanswered'" + "</p>");
     $("#totalcorrect").append("Correct Answers: " + correctAnswers);
     $("#totalincorrect").append("Incorrect Answers: " + incorrectAnswers);
     $("#totalunanswered").append("Unanswered: " + unanswered);
 
 
 
-    //TODO: Add a reset button 
+    //Add a reset button 
      $("#resetblock").html("<br>" + "<button class='resbutton' id='resetbutton'></button>");
      $("#resetbutton").text("Play Again");
 
     
 
+
+    // reset button that clears out totals, returns to cycleQuiz
+
+
+    $("#resetbutton").click(function playAgain() {
+    
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        unanswered = 0;
+        questionIndex = 0;
+        timeLeft = 30;
+        $("#resetbutton").remove();
+        cycleQuiz();
+    
+        });
+
+
+
+
 };
 
-    //TODO: reset button that clears out totals, returns to cycleQuiz
-
-
-    // function playAgain() {
-
-    // correctAnswers = 0;
-    // incorrectAnswers = 0;
-    // unanswered = 0;
-    // questionIndex = 0;
-    // timeLeft = 30;
-
-    // cycleQuiz();
-
-    // };
-    // $("#resetbutton").on("click", playAgain());
+    
+    
