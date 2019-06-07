@@ -79,7 +79,7 @@ window.onload = openGame;
 //TODO: reset mechanic, which brings the game back to the first question, having the similar effect as "start" did(but replacing start).
 
 
-//TODO: functions for timer to go down 30 seconds, before triggering function to go to next question.
+// functions for timer to go down 30 seconds, before triggering function to go to next question.
 
 function startInterval (){
     clearInterval(intervalId);
@@ -91,32 +91,31 @@ function countdown (){
     timeLeft--;
     $("#timeleft").html("Time Remaining: " + timeLeft);
     timeCount = true;
-    //TODO: when time hits 0, stop countdown, add 30 secs back, add to the Qindex, cycleQuiz to next set of question & answers
+    // when time hits 0, stop countdown, add 30 secs back, add to the Qindex, cycleQuiz to next set of question & answers
     if (timeLeft === 0) {
      clearInterval(intervalId);
      timeCount = false;
-     questionIndex++;
-     unanswered++;
-     timeLeft = 30;
-     cycleQuiz();
+        if (questionIndex >= 5) {
+        unanswered++;
+        resetPage();
 
+        }
+        else {
+        questionIndex++;
+        unanswered++;
+        timeLeft = 30;
+        cycleQuiz();
+        }
 
     }
 
 }
 
-//TODO: function to stop countdown
-
-function stopCount(){
-
-    
-
-};
 
 
 
 
-//TODO: start game sequence
+// start game sequence
 
 function cycleQuiz (){
     
@@ -140,11 +139,7 @@ function cycleQuiz (){
     startInterval();
     
     
-    
-    
-    
-    
-    
+        
     
     
     
@@ -153,3 +148,40 @@ function cycleQuiz (){
 
 
 //TODO: function to create final page, showing correctAnswers, incorrectAnswers, unanswered, and add a button to reset the question cycle.
+
+function resetPage () {
+
+    // empty & replace q & a with final message and totals
+    $("#questionblock").empty();
+    $("#questionblock").html("And thar she blows!  See how ye did: ");
+    $("#answerblock").empty();
+    $("#answerblock").html("<br>" + "<p id='totalcorrect'>" + "<br>" + "<p id='totalincorrect'" + "</p>" + "<br>" + "<p id='totalunanswered'" + "</p>");
+    $("#totalcorrect").append("Correct Answers: " + correctAnswers);
+    $("#totalincorrect").append("Incorrect Answers: " + incorrectAnswers);
+    $("#totalunanswered").append("Unanswered: " + unanswered);
+
+
+
+    //TODO: Add a reset button 
+     $("#resetblock").html("<br>" + "<button class='resbutton' id='resetbutton'></button>");
+     $("#resetbutton").text("Play Again");
+
+    
+
+};
+
+    //TODO: reset button that clears out totals, returns to cycleQuiz
+
+
+    // function playAgain() {
+
+    // correctAnswers = 0;
+    // incorrectAnswers = 0;
+    // unanswered = 0;
+    // questionIndex = 0;
+    // timeLeft = 30;
+
+    // cycleQuiz();
+
+    // };
+    // $("#resetbutton").on("click", playAgain());
