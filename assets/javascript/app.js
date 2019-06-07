@@ -79,21 +79,65 @@ window.onload = openGame;
 //TODO: reset mechanic, which brings the game back to the first question, having the similar effect as "start" did(but replacing start).
 
 
-//TODO: function for timer to go down 30 seconds, before triggering function to go to next question.
+//TODO: functions for timer to go down 30 seconds, before triggering function to go to next question.
+
+function startInterval (){
+    clearInterval(intervalId);
+    intervalId = setInterval(countdown, 1000);
+
+};
+
+function countdown (){
+    timeLeft--;
+    $("#timeleft").html("Time Remaining: " + timeLeft);
+    timeCount = true;
+    //TODO: when time hits 0, stop countdown, add 30 secs back, add to the Qindex, cycleQuiz to next set of question & answers
+    if (timeLeft === 0) {
+     clearInterval(intervalId);
+     timeCount = false;
+     questionIndex++;
+     unanswered++;
+     timeLeft = 30;
+     cycleQuiz();
+
+
+    }
+
+}
+
+//TODO: function to stop countdown
+
+function stopCount(){
+
+    
+
+};
+
+
 
 
 //TODO: start game sequence
 
 function cycleQuiz (){
     
-    //TODO: display timer with countdown in #timeleft.
     $("#timeleft").html("Time Remaining: " + timeLeft);
-    //TODO: display first question from object in #questionblock
-    $("#questionblock").replaceWith(triviaQuestions[questionIndex].question);
+    // display first question from object in #questionblock
+    $("#questionblock").empty();
+    $("#questionblock").html(triviaQuestions[questionIndex].question);
     console.log("this works");
     
-    //TODO: display column of potential answers from object as clickable buttons in #answerblock
-    $("#answerblock").replaceWith("<br>" + triviaQuestions[questionIndex].answers);
+    // display column of potential answers from object as clickable buttons in #answerblock
+   
+    $("#answerblock").empty();
+    $("#answerblock").html("<br>" + "<button class='answerbutton' id='answer1'></button>" + "<br>" + "<button class='answerbutton' id='answer2'></button>" + "<br>" + "<button class='answerbutton' id='answer3'></button>" + "</br>" + "<button class='answerbutton' id='answer4'></button>");
+    $("#answer1").append(triviaQuestions[questionIndex].answers[0]);
+    $("#answer2").append(triviaQuestions[questionIndex].answers[1]);
+    $("#answer3").append(triviaQuestions[questionIndex].answers[2]);
+    $("#answer4").append(triviaQuestions[questionIndex].answers[3]);
+
+    //Start the countdown
+
+    startInterval();
     
     
     
@@ -105,3 +149,7 @@ function cycleQuiz (){
     
     
 }
+
+
+
+//TODO: function to create final page, showing correctAnswers, incorrectAnswers, unanswered, and add a button to reset the question cycle.
