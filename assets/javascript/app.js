@@ -18,21 +18,21 @@ var triviaQuestions = [{
     correct: 2,
 },
 
- {
+{
     question: "Which pirate was technically a knighted lord?",
     answers: ["Anne Bonny", "William Kidd", "Bartholomew Roberts", "Henry Morgan"],
     correct: 3,
 
 },
 
-{  
+{
     question: "When was the Golden Age of Piracy?",
     answers: ["1650-1730", "1775-1783", "800-1066", "It's happening right now."],
     correct: 0,
 
 },
 
-{  
+{
     question: "Where was the 'Republic of Pirates' located?",
     answers: ["Cat Island", "Nassau", "Davos", "Freeport"],
     correct: 1,
@@ -42,7 +42,7 @@ var triviaQuestions = [{
 {
     question: "According to the Pirate Code of Black Bart Roberts, who besides the Captain receives two shares of the prize?",
     answers: ["The Swabbie", "The Boatswain", "The Gunner", "The Quartermaster"],
-    correct: 3, 
+    correct: 3,
 
 },
 
@@ -57,52 +57,52 @@ var triviaQuestions = [{
 ];
 
 //variable to hold index of current question
-var questionIndex = 0; 
+var questionIndex = 0;
 
 
 //On load start screen -- do not repeat this after first loading of the page.
 
-function openGame () {
- $("#questionblock").html("Welcome to Pirate Trivia, Yarr!");
- $("#answerblock").html("<button class= startbutton>Press Here to Begin the Voyage</button>");
- //upon clicking start the game begins:
- $(".startbutton").on("click", function startGame() {
-    //  console.log("click click"); //this will initiate function that starts the game.
-     cycleQuiz();
+function openGame() {
+    $("#questionblock").html("Welcome to Pirate Trivia, Yarr!");
+    $("#answerblock").html("<button class= startbutton>Press Here to Begin the Voyage</button>");
+    //upon clicking start the game begins:
+    $(".startbutton").on("click", function startGame() {
+        //  console.log("click click"); //this will initiate function that starts the game.
+        cycleQuiz();
     });
 
 };
 window.onload = openGame;
-    
-    
+
+
 
 
 // functions for timer to go down 30 seconds, before triggering function to go to next question.
 
-function startInterval (){
+function startInterval() {
     clearInterval(intervalId);
     intervalId = setInterval(countdown, 1000);
 
 };
 
-function countdown (){
+function countdown() {
     timeLeft--;
     $("#timeleft").html("Time Remaining: " + timeLeft);
     timeCount = true;
     // when time hits 0, stop countdown, add 30 secs back, add to the Qindex, cycleQuiz to next set of question & answers
     if (timeLeft === 0) {
-     clearInterval(intervalId);
-     timeCount = false;
+        clearInterval(intervalId);
+        timeCount = false;
         if (questionIndex >= 5) {
-        unanswered++;
-        resetPage();
+            unanswered++;
+            resetPage();
 
         }
         else {
-        questionIndex++;
-        unanswered++;
-        timeLeft = 30;
-        cycleQuiz();
+            questionIndex++;
+            unanswered++;
+            timeLeft = 30;
+            cycleQuiz();
         }
 
     }
@@ -115,16 +115,16 @@ function countdown (){
 
 // start game sequence
 
-function cycleQuiz (){
+function cycleQuiz() {
 
     $("#timeleft").html("Time Remaining: " + timeLeft);
     // display first question from object in #questionblock
     $("#questionblock").empty();
     $("#questionblock").html(triviaQuestions[questionIndex].question);
     // console.log("this works");
-    
+
     // display column of potential answers from object as clickable buttons in #answerblock
-   
+
     $("#answerblock").empty();
     $("#answerblock").html("<br>" + "<button class='answerbutton' id='answer1'></button>" + "<br>" + "<button class='answerbutton' id='answer2'></button>" + "<br>" + "<button class='answerbutton' id='answer3'></button>" + "</br>" + "<button class='answerbutton' id='answer4'></button>");
     $("#answer1").append(triviaQuestions[questionIndex].answers[0]);
@@ -135,55 +135,59 @@ function cycleQuiz (){
     //Start the countdown
 
     startInterval();
-    
+
+
     //TODO: Answer buttons clicked, leading to a correct or wrong answer.
-    
+
     $(".answerbutton").click(function answerQuestion() {
-      if(triviaQuestions[questionIndex].answers === triviaQuestions[questionIndex].correct) {
-        clearInterval(intervalId);
-        timeCount = false;
-        if (questionIndex >= 5) {
-        correctAnswers++;
-        resetPage();
+        console.log("click click");
+        var chosenAnswer = $(this).index();
+        console.log(chosenAnswer);
+        if (chosenAnswer === triviaQuestions[questionIndex].correct) {
+            clearInterval(intervalId);
+            timeCount = false;
+            if (questionIndex >= 5) {
+                correctAnswers++;
+                resetPage();
 
-        } else {
-        correctAnswers++;
-        questionIndex++;
-        timeLeft = 30;
-        cycleQuiz();
+            } else {
+                correctAnswers++;
+                questionIndex++;
+                timeLeft = 30;
+                cycleQuiz();
 
-      } 
-      
-      if (triviaQuestions[questionIndex].answers !== triviaQuestions[questionIndex].correct) {
-        clearInterval(intervalId);
-        timeCount = false;
-        if (questionIndex >= 5) {
-        incorrectAnswers++;
-        resetPage();
-        
-        } else {    
-        incorrectAnswers++;
-        questionIndex++;
-        timeLeft = 30;
-        cycleQuiz();
+            }
+
+            
+
+
+
+        };
+        if (chosenAnswer !== triviaQuestions[questionIndex].correct) {
+            clearInterval(intervalId);
+            timeCount = false;
+            if (questionIndex >= 5) {
+                incorrectAnswers++;
+                resetPage();
+
+            } else {
+                incorrectAnswers++;
+                questionIndex++;
+                timeLeft = 30;
+                cycleQuiz();
+            }
+
+
         }
-
-
-      }
-
-
-
-    };
-    
     });
-    
+
 };
 
 
 
 // function to create final page, showing correctAnswers, incorrectAnswers, unanswered, and add a button to reset the question cycle.
 
-function resetPage () {
+function resetPage() {
 
     // empty & replace q & a with final message and totals
     $("#questionblock").empty();
@@ -197,17 +201,17 @@ function resetPage () {
 
 
     //Add a reset button 
-     $("#resetblock").html("<br>" + "<button class='resbutton' id='resetbutton'></button>");
-     $("#resetbutton").text("Play Again");
+    $("#resetblock").html("<br>" + "<button class='resbutton' id='resetbutton'></button>");
+    $("#resetbutton").text("Play Again");
 
-    
+
 
 
     // reset button that clears out totals, returns to cycleQuiz
 
 
     $("#resetbutton").click(function playAgain() {
-    
+
         correctAnswers = 0;
         incorrectAnswers = 0;
         unanswered = 0;
@@ -215,13 +219,12 @@ function resetPage () {
         timeLeft = 30;
         $("#resetbutton").remove();
         cycleQuiz();
-    
-        });
+
+    });
 
 
 
 
 };
 
-    
-    
+
