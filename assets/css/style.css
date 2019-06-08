@@ -63,3 +63,19 @@ font-size: 30pt;
 
 
 }
+
+
+.answerbutton {
+width: 65%;
+height: 6em;
+font-family: 'Trade Winds';
+font-size: 14pt;
+transition-duration: 0.4s;
+
+
+}
+
+.answerbutton:hover {
+background-color: goldenrod;
+
+}

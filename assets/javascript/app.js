@@ -193,7 +193,7 @@ function resetPage() {
     $("#questionblock").empty();
     $("#questionblock").html("And thar she blows!  See how ye did: ");
     $("#answerblock").empty();
-    $("#answerblock").html("<br>" + "<p id='totalcorrect'" + "</p>" + "<p id='totalincorrect'" + "</p>" + "<br>" + "<p id='totalunanswered'" + "</p>");
+    $("#answerblock").html("<br>" + "<p id='totalcorrect'" + "</p>" + "<br>" + "<p id='totalincorrect'" + "</p>" + "<br>" + "<p id='totalunanswered'" + "</p>");
     $("#totalcorrect").append("Correct Answers: " + correctAnswers);
     $("#totalincorrect").append("Incorrect Answers: " + incorrectAnswers);
     $("#totalunanswered").append("Unanswered: " + unanswered);
