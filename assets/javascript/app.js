@@ -15,41 +15,41 @@ var timeCount = false;
 var triviaQuestions = [{
     question: "What was Blackbeard's real name?",
     answers: ["Jack Rackham", "Jack Sparrow", "Edward Teach", "Michael Hogan"],
-    correct: 2,
+    correct: "3",
 },
 
 {
     question: "Which pirate was technically a knighted lord?",
     answers: ["Anne Bonny", "William Kidd", "Bartholomew Roberts", "Henry Morgan"],
-    correct: 3,
+    correct: "4",
 
 },
 
 {
     question: "When was the Golden Age of Piracy?",
     answers: ["1650-1730", "1775-1783", "800-1066", "It's happening right now."],
-    correct: 0,
+    correct: "1",
 
 },
 
 {
     question: "Where was the 'Republic of Pirates' located?",
     answers: ["Cat Island", "Nassau", "Davos", "Freeport"],
-    correct: 1,
+    correct: "2",
 
 },
 
 {
     question: "According to the Pirate Code of Black Bart Roberts, who besides the Captain receives two shares of the prize?",
     answers: ["The Swabbie", "The Boatswain", "The Gunner", "The Quartermaster"],
-    correct: 3,
+    correct: "4",
 
 },
 
 {
     question: "Who was Anne Bonny married to when she lived as a pirate?",
     answers: ["Benjamin Hornigold", "Stede Bonnet", "Calico Jack", "Charles Vane"],
-    correct: 2,
+    correct: "3",
 
 },
 
@@ -126,32 +126,32 @@ function cycleQuiz() {
     // display column of potential answers from object as clickable buttons in #answerblock
 
     $("#answerblock").empty();
-    $("#answerblock").html("<br>" + "<button class='answerbutton' id='answer1'></button>" + "<br>" + "<button class='answerbutton' id='answer2'></button>" + "<br>" + "<button class='answerbutton' id='answer3'></button>" + "</br>" + "<button class='answerbutton' id='answer4'></button>");
-    $("#answer1").append(triviaQuestions[questionIndex].answers[0]);
-    $("#answer2").append(triviaQuestions[questionIndex].answers[1]);
-    $("#answer3").append(triviaQuestions[questionIndex].answers[2]);
-    $("#answer4").append(triviaQuestions[questionIndex].answers[3]);
+    $("#answerblock").html("<br>" + "<button class='answerbutton' id='1'></button>" + "<br>" + "<button class='answerbutton' id='2'></button>" + "<br>" + "<button class='answerbutton' id='3'></button>" + "</br>" + "<button class='answerbutton' id='4'></button>");
+    $("#1").append(triviaQuestions[questionIndex].answers[0]);
+    $("#2").append(triviaQuestions[questionIndex].answers[1]);
+    $("#3").append(triviaQuestions[questionIndex].answers[2]);
+    $("#4").append(triviaQuestions[questionIndex].answers[3]);
 
     //Start the countdown
 
     startInterval();
 
 
-    //TODO: Answer buttons clicked, leading to a correct or wrong answer.
+    // Answer buttons clicked, leading to a correct or wrong answer.
 
     $(".answerbutton").click(function answerQuestion() {
         console.log("click click");
-        var chosenAnswer = $(this).index();
+        var chosenAnswer = $(this)[0].id;
         console.log(chosenAnswer);
         if (chosenAnswer === triviaQuestions[questionIndex].correct) {
             clearInterval(intervalId);
             timeCount = false;
+            correctAnswers++;
             if (questionIndex >= 5) {
-                correctAnswers++;
                 resetPage();
 
             } else {
-                correctAnswers++;
+                
                 questionIndex++;
                 timeLeft = 30;
                 cycleQuiz();
@@ -162,16 +162,16 @@ function cycleQuiz() {
 
 
 
-        };
-        if (chosenAnswer !== triviaQuestions[questionIndex].correct) {
+        }
+        else  {
             clearInterval(intervalId);
             timeCount = false;
+            incorrectAnswers++;
             if (questionIndex >= 5) {
-                incorrectAnswers++;
                 resetPage();
 
             } else {
-                incorrectAnswers++;
+               
                 questionIndex++;
                 timeLeft = 30;
                 cycleQuiz();
