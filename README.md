@@ -8,7 +8,7 @@ This project can be found in my github portfolio here: https://github.com/JoeLea
 
 The live page can be found here: https://joelearns2code.github.io/TriviaGame/
 
-Additionally, this page can be accessed from my portfolio page here: 
+Additionally, this page can be accessed from my portfolio page here: https://joelearns2code.github.io/Bootstrap-Portfolio/portfolio.html
 
 ### Prerequisites
 

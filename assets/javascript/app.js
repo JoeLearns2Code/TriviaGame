@@ -93,16 +93,21 @@ function countdown() {
     if (timeLeft === 0) {
         clearInterval(intervalId);
         timeCount = false;
+        $("#questionblock").empty();
+        $("#questionblock").html("Times Up!");
+        
+        
         if (questionIndex >= 5) {
             unanswered++;
-            resetPage();
+            setTimeout(resetPage, 3000);
 
         }
         else {
             questionIndex++;
             unanswered++;
             timeLeft = 30;
-            cycleQuiz();
+            setTimeout(cycleQuiz, 3000);
+
         }
 
     }
@@ -147,14 +152,16 @@ function cycleQuiz() {
             clearInterval(intervalId);
             timeCount = false;
             correctAnswers++;
+            $("#questionblock").empty();
+            $("#questionblock").html("Correct!");
             if (questionIndex >= 5) {
-                resetPage();
+                setTimeout(resetPage, 3000);
 
             } else {
                 
                 questionIndex++;
                 timeLeft = 30;
-                cycleQuiz();
+                setTimeout(cycleQuiz, 3000);
 
             }
 
@@ -167,14 +174,16 @@ function cycleQuiz() {
             clearInterval(intervalId);
             timeCount = false;
             incorrectAnswers++;
+            $("#questionblock").empty();
+            $("#questionblock").html("Incorrect!");
             if (questionIndex >= 5) {
-                resetPage();
+                setTimeout(resetPage, 3000);
 
             } else {
                
                 questionIndex++;
                 timeLeft = 30;
-                cycleQuiz();
+                setTimeout(cycleQuiz, 3000);
             }
 
 
