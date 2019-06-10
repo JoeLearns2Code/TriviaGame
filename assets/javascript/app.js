@@ -95,6 +95,7 @@ function countdown() {
         timeCount = false;
         $("#questionblock").empty();
         $("#questionblock").html("Times Up!");
+        $("#answerblock").empty();
         
         
         if (questionIndex >= 5) {
@@ -154,6 +155,7 @@ function cycleQuiz() {
             correctAnswers++;
             $("#questionblock").empty();
             $("#questionblock").html("Correct!");
+            $("#answerblock").empty();
             if (questionIndex >= 5) {
                 setTimeout(resetPage, 3000);
 
@@ -176,6 +178,7 @@ function cycleQuiz() {
             incorrectAnswers++;
             $("#questionblock").empty();
             $("#questionblock").html("Incorrect!");
+            $("#answerblock").empty();
             if (questionIndex >= 5) {
                 setTimeout(resetPage, 3000);
 
